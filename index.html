@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <p class="title">Calculator</p>
+    <p class="title">Simple Calculator</p>
 
     <main>
         <div class="calculatorBody">
@@ -41,11 +41,11 @@
                         <button class="number" onclick="printNumber('0')">0</button>
                         <button class="operator" onclick="printNumber('/')">/</button>
                         <button class="operator" onclick="printNumber('*')">*</button>
-                        <button class="equal" onclick="printNumber('=')">=</button>
+                        <button class="equal" onclick="printNumber('=')" id="equalButton">=</button>
                     </div>
                     <div class="keypadRow">
-                        <button class="clear" onclick="clearScreen()">Clear</button>
-                        <button class="clear" onclick="backspace()">Back</button>
+                        <button class="wideButton" onclick="clearScreen()" id="clearButton">Clear</button>
+                        <button class="wideButton" onclick="backspace()" id="backButton">Back</button>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,6 @@
         <div class="calculatorHistory">
             <p style="text-align: center;">Recent expressions</p>
             <ul id="historyList">
-                <li>s</li>
             </ul>
         </div>
     </main>
