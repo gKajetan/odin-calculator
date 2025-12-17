@@ -103,3 +103,47 @@ function addToHistory(eq, res) {
     li.textContent = `${eq} = ${res}`;
     list.prepend(li); // add to start of the list
 }
+
+function backspace() {
+    if (currentOperator === null) {
+        // edit first number
+        if (firstNumber.length > 0) {
+            firstNumber = firstNumber.slice(0, -1);
+            updateScreen(firstNumber || '0');
+        }
+    } else {
+        // edit second number
+        if (currentNumber.length > 0) {
+            currentNumber = currentNumber.slice(0, -1);
+            updateScreen(currentNumber || '0');
+        } else {
+            // cant undo zero
+            currentOperator = null;
+            updateScreen(firstNumber);
+        }
+    }
+}
+
+// KEYBOARD SUPPORT
+window.addEventListener('keydown', (e) => {
+    // nums and dot
+    if (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'].includes(e.key)) {
+        printNumber(e.key);
+    }
+    // operators
+    if (['+', '-', '*', '/'].includes(e.key)) {
+        printNumber(e.key);
+    }
+    // result: enter or =
+    if (e.key === 'Enter' || e.key === '=') {
+        printNumber('=');
+    }
+    // Backspace dla usuwania
+    if (e.key === 'Backspace') {
+        backspace();
+    }
+    // Escape dla czyszczenia (Clear)
+    if (e.key === 'Escape') {
+        clearScreen();
+    }
+});
