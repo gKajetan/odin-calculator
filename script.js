@@ -21,6 +21,8 @@ function divide(a, b) {
 let firstNumber = '';   // first/previously inputted number remembered by var
 let currentNumber = ''; // currently inputting number, used with previous/first number
 let currentOperator = null; // operator
+// history vars
+const historyList = document.querySelector('ul');
 
 // update screen content
 function updateScreen(value) {
@@ -47,16 +49,23 @@ function printNumber(value) {
     else if (['+', '-', '*', '/'].includes(value)) {
         // eval expression IF there is firstNumber, operator and currentNumber
         if (firstNumber !== '' && currentNumber !== '') {
-            firstNumber = operate(currentOperator, firstNumber, currentNumber).toString();
+            const equation = `${firstNumber} ${currentOperator} ${currentNumber}`;
+            const result = operate(currentOperator, firstNumber, currentNumber).toString();
+
+            addToHistory(equation, result);
+            firstNumber = result;
             currentNumber = '';
-            updateScreen(firstNumber);
         }
         currentOperator = value;
     }
     // IF '=' is clicked, display result
     else if (value === '=') {
         if (currentOperator !== null && currentNumber !== '') {
-            firstNumber = operate(currentOperator, firstNumber, currentNumber).toString();
+            const equation = `${firstNumber} ${currentOperator} ${currentNumber}`;
+            const result = operate(currentOperator, firstNumber, currentNumber).toString();
+
+            addToHistory(equation, result);
+            firstNumber = result;
             currentNumber = '';
             currentOperator = null;
             updateScreen(firstNumber);
@@ -88,3 +97,9 @@ function clearScreen() {
     updateScreen('0');
 }
 
+function addToHistory(eq, res) {
+    const list = document.getElementById('historyList');
+    const li = document.createElement('li');
+    li.textContent = `${eq} = ${res}`;
+    list.prepend(li); // add to start of the list
+}
