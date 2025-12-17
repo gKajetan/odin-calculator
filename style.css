@@ -32,23 +32,35 @@ main {
     text-align: right;
     padding: 0px 16px;
     font-size: 24px;
+    margin: 16px;
 }
-
 
 .keypad {
     padding: 16px;
     margin-top: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .keypadRow {
     padding: 8px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
+.keypadRowBottom {
+    padding: 8px;
+    display: flex;
+}
 button {
     font-size: 24px;
     width: 50px;
     height: 50px;
+}
+
+.clearButton {
+    width:100px;
 }
 
 
